@@ -1,15 +1,18 @@
 import Head from 'next/head'
-import Nav from '../components/Nav'
+import Nav from '../components/nav'
+import Markdown from '../components/markdown'
+import { remarkHTML } from '../lib/posts';
 
-export default function Home() {
+export default function Home({data}) {
   return (
-    <div className="container">
+    <div>
       <Head>
-        <title>Create Next App</title>
+        <title>Ssong10</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Nav ></Nav>
       <main>
-        <Nav ></Nav>
+        <Markdown data={data}/>
       </main>
       <style jsx>{`
         .container {
@@ -158,4 +161,12 @@ export default function Home() {
       `}</style>
     </div>
   )
+}
+export async function getStaticProps() {
+  const data = await remarkHTML(['main','main'])
+  return {
+    props: {
+      data
+    }
+  }
 }

@@ -1,27 +1,22 @@
 import Link from 'next/link'
 import { posts, components } from '../lib/FILE'
+const Item = ({item,path}) => (
+  <Link href={path}>
+    <div className="nav-item">
+      <span>{item}</span>
+    </div>
+  </Link>
+)
+
 const Subject = ({subject,items}) =>{
   return (
     <div className="nav-sub">
       <span>{subject}</span>
       <div className="nav-item-list">
-        {items.map(item => (
-          <Link key={item} href={'/posts'+'/'+subject+'/'+item}>
-            <div className="nav-item">
-              <span>{item}</span>
-            </div>
-          </Link>
+        {items.map((item,idx) => (
+          <Item key={idx} path={'/posts'+'/'+subject+'/'+item} item={item} />
         ))}
-      </div>
-      <style jsx>
-        {`
-          .nav-sub{display:inline-block;line-height:2.4rem;position:relative;margin-left:3vw;cursor:pointer;text-align:left}
-          .nav-sub:hover .nav-item-list {display:block}
-          .nav-sub>span {padding:1vw}
-          .nav-item-list {display:none;position: absolute;line-height:2.2rem;width:200px;right:0;min-height:auto;border:1px solid #eaeaea;background-color:#fefcfe;padding:0.3rem}
-          .nav-item{display:inline-block;width:100%;padding:0rem 0.5rem;}
-        `}
-      </style>      
+      </div>     
     </div>
   )
 }
@@ -38,8 +33,17 @@ export default function Nav() {
         {posts.map((post,idx) => (
           <Subject key={idx} subject={post.subject} items={post.items}></Subject>
         ))}
+        <div className="nav-sub">
+          <span>Component</span>
+          <div className="nav-item-list">
+            {components.map((component,idx) => (
+              <Item key={idx} path={`/components/${component}`} item={component}>
+              </Item>
+            ))}
+          </div>
+        </div>
       </div>
-      <style jsx>
+      <style jsx global>
         {`
           #nav {
             z-index:1000;
@@ -62,6 +66,11 @@ export default function Nav() {
             line-height : 2.4rem;
             float:right;
           }
+          .nav-sub{display:inline-block;line-height:2.4rem;position:relative;margin-left:3vw;cursor:pointer;text-align:left}
+          .nav-sub:hover .nav-item-list {display:block}
+          .nav-sub>span {padding:1vw}
+          .nav-item-list {display:none;position: absolute;line-height:2.2rem;width:200px;right:0;min-height:auto;border:1px solid #eaeaea;background-color:#fefcfe;padding:0.3rem}
+          .nav-item{display:inline-block;width:100%;padding:0rem 0.5rem;}
         `}
       </style>
     </header>
