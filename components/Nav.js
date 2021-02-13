@@ -1,22 +1,30 @@
-import Link from 'next/link'
+import Link   from 'next/link'
 import { posts, components } from '../lib/FILE'
-const Item = ({item,path}) => (
-  <Link href={path}>
-    <div className="nav-item">
-      <span>{item}</span>
-    </div>
-  </Link>
-)
+import { useRouter } from "next/router";
+import {useState} from 'react'
+const Item = ({item,path}) => {
+  const { asPath } = useRouter();
+  const matchPath = decodeURI(asPath).trim('/') === path.trim('/')
+  return (
+    <Link href={path}
+    >
+      <div className={"nav-item " + (matchPath?'active':'')}>
+        <span>{item}</span>
+      </div>
+    </Link>
+  )
+}
 
-const Subject = ({subject,items}) =>{
+const Subject = ({subject,items,basePath}) => {
   return (
     <div className="nav-sub">
       <span>{subject}</span>
       <div className="nav-item-list">
         {items.map((item,idx) => (
-          <Item key={idx} path={'/posts'+'/'+subject+'/'+item} item={item} />
-        ))}
-      </div>     
+          <Item 
+          key={idx} path={basePath+subject+'/'+item} item={item} />
+          ))}
+      </div>
     </div>
   )
 }
@@ -31,17 +39,18 @@ export default function Nav() {
       <span className="mobile-title">[ Ssong 10 ]</span>
       <div className="nav-links">
         {posts.map((post,idx) => (
-          <Subject key={idx} subject={post.subject} items={post.items}></Subject>
+          <Subject
+            key={idx}
+            subject={post.subject}
+            items={post.items}
+            basePath = '/posts/'
+          ></Subject>
         ))}
-        <div className="nav-sub">
-          <span>Component</span>
-          <div className="nav-item-list">
-            {components.map((component,idx) => (
-              <Item key={idx} path={`/components/${component}`} item={component}>
-              </Item>
-            ))}
-          </div>
-        </div>
+        <Subject
+          subject='component'
+          items={components}
+          basePath = '/'
+        ></Subject>
       </div>
       <style jsx global>
         {`
@@ -69,8 +78,36 @@ export default function Nav() {
           .nav-sub{display:inline-block;line-height:2.4rem;position:relative;margin-left:3vw;cursor:pointer;text-align:left}
           .nav-sub:hover .nav-item-list {display:block}
           .nav-sub>span {padding:1vw}
-          .nav-item-list {display:none;position: absolute;line-height:2.2rem;width:200px;right:0;min-height:auto;border:1px solid #eaeaea;background-color:#fefcfe;padding:0.3rem}
-          .nav-item{display:inline-block;width:100%;padding:0rem 0.5rem;}
+          .nav-item-list {display:none;position: absolute;line-height:2.2rem;width:200px;right:-5px;top:115%;min-height:auto;border:1px solid #eaeaea;background-color:#fefcfe;padding:0.3rem}
+          .nav-item{
+            padding:0rem 0.5rem;
+            transition: 0.3s
+          }
+          .nav-item:hover {
+            background-color : rgba(135,64,33,0.1);
+          }
+          .active {color:red;}
+          .nav-item-list:after,
+          .nav-item-list:before {
+            content: '';
+            position: absolute;
+            width:0;
+            height:0;
+            top: -20px;
+            border-style: solid;
+          }
+          .nav-item-list:after {
+            left: 170px;
+            border-color: transparent transparent white transparent;
+            border-width: 10px;
+          }
+          .nav-item-list:before {
+            left: 169px;
+            top:-21px;
+            border-color: transparent transparent gray transparent;
+            border-width: 11px;
+            z-index:-1
+          }
         `}
       </style>
     </header>

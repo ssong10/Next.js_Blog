@@ -1,5 +1,5 @@
 import { posts } from '../../lib/FILE'
-import Nav from '../../components/nav'
+import Layout from '../../components/layout'
 import Markdown from '../../components/markdown'
 import { remarkHTML } from '../../lib/posts';
 
@@ -7,10 +7,9 @@ export default function Post({params,data}) {
   const { id } = params
   const [subject,item] = id;
   return (
-    <div>
-      <Nav></Nav>
+    <Layout>
       <Markdown data={data}></Markdown>
-    </div>
+    </Layout>
   )
 }
 export async function getStaticPaths() {

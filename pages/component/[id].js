@@ -1,6 +1,5 @@
 import { components } from '../../lib/FILE'
-import Nav from '../../components/nav'
-
+import Layout from '../../components/layout'
 import {getBlobUrl} from '../../lib/components'
 import {getComponent} from '../../lib/firebase'
 import { useEffect, useState } from 'react'
@@ -22,8 +21,7 @@ export default function Component({params,code}) {
     setType(e.target.innerText)
   }
   return (
-    <div>
-      <Nav></Nav>
+    <Layout>
       <div className="code__container">
         <h1>{id}</h1>
         <div onClick={onChange} className="tab__wrap">
@@ -94,7 +92,7 @@ export default function Component({params,code}) {
           }
         </style>
       </div>
-    </div>
+    </Layout>
   )
 }
 export async function getStaticPaths() {
@@ -112,6 +110,11 @@ export async function getStaticPaths() {
   // Return a list of possible value for id
 }
 export async function getStaticProps({ params }) {
+  // const code = {
+  //   html : '<div class="red"></div>',
+  //   js : '',
+  //   css : '.red {background-color:red;width:100px;height:100px;'
+  // }
   const code = await getComponent(params.id)
   return {
     props: {
