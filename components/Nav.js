@@ -1,35 +1,42 @@
 import Link   from 'next/link'
 import { posts, components } from '../lib/FILE'
 import { useRouter } from "next/router";
-import {useState} from 'react'
-const Item = ({item,path}) => {
-  const { asPath } = useRouter();
-  const matchPath = decodeURI(asPath).trim('/') === path.trim('/')
+
+const Item = ({item,path,match}) => {
   return (
     <Link href={path}
     >
-      <div className={"nav-item " + (matchPath?'active':'')}>
+      <div className={"nav-item " + (match?'active':'')}>
         <span>{item}</span>
       </div>
     </Link>
   )
 }
 
-const Subject = ({subject,items,basePath}) => {
+const Subject = ({paths,subject,items,basePath}) => {
+  const matchSub = paths[0] === subject
+  const matchItem = (item) => {
+    return paths[1] === item
+  }
   return (
     <div className="nav-sub">
-      <span>{subject}</span>
-      <div className="nav-item-list">
-        {items.map((item,idx) => (
-          <Item 
-          key={idx} path={basePath+subject+'/'+item} item={item} />
-          ))}
+      <span className={matchSub ? 'active' : ''}>{subject}</span>
+      <div className="nav-items-wrap">
+        <div className="nav-item-list">
+          {items.map((item,idx) => (
+            <Item
+              key={idx} path={basePath+subject+'/'+item} item={item}
+              match={matchSub & matchItem(item)} />
+            ))}
+        </div>
       </div>
     </div>
   )
 }
 
 export default function Nav() {
+  const { asPath } = useRouter();
+  const path = decodeURI(asPath).trim('/').split('/')
   return (
     <header id="nav">
       <i className="side-button fas fa-bars" aria-hidden="true"></i>
@@ -40,6 +47,7 @@ export default function Nav() {
       <div className="nav-links">
         {posts.map((post,idx) => (
           <Subject
+            paths={path.slice(-2,)}
             key={idx}
             subject={post.subject}
             items={post.items}
@@ -47,6 +55,7 @@ export default function Nav() {
           ></Subject>
         ))}
         <Subject
+          paths={path.slice(-2,)}
           subject='component'
           items={components}
           basePath = '/'
@@ -78,7 +87,8 @@ export default function Nav() {
           .nav-sub{display:inline-block;line-height:2.4rem;position:relative;margin-left:3vw;cursor:pointer;text-align:left}
           .nav-sub:hover .nav-item-list {display:block}
           .nav-sub>span {padding:1vw}
-          .nav-item-list {display:none;position: absolute;line-height:2.2rem;width:200px;right:-5px;top:115%;min-height:auto;border:1px solid #eaeaea;background-color:#fefcfe;padding:0.3rem}
+          .nav-items-wrap { padding-top:20px}
+          .nav-item-list {display:none;position: absolute;line-height:2.2rem;width:200px;right:-5px;top:85%;min-height:auto;border:1px solid #eaeaea;background-color:#fefcfe;padding:0.3rem}
           .nav-item{
             padding:0rem 0.5rem;
             transition: 0.3s
@@ -86,7 +96,7 @@ export default function Nav() {
           .nav-item:hover {
             background-color : rgba(135,64,33,0.1);
           }
-          .active {color:red;}
+          .active {color: #2f9aea;}
           .nav-item-list:after,
           .nav-item-list:before {
             content: '';

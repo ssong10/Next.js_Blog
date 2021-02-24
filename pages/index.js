@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Layout from '../components/layout'
 import Markdown from '../components/markdown'
-import { remarkHTML } from '../lib/posts';
+import { mdParser } from '../lib/posts';
 
 export default function Home({data}) {
   return (
@@ -17,7 +17,7 @@ export default function Home({data}) {
   )
 }
 export async function getStaticProps() {
-  const data = await remarkHTML(['main','main'])
+  const data = await mdParser(['main','main'])
   return {
     props: {
       data

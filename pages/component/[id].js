@@ -3,6 +3,8 @@ import Layout from '../../components/layout'
 import {getBlobUrl} from '../../lib/components'
 import {getComponent} from '../../lib/firebase'
 import { useEffect, useState } from 'react'
+import Prism from 'prismjs';
+
 export default function Component({params,code}) {
   const { id } = params
   const [url, setSrc] = useState(''); // initial src will be empty
@@ -10,15 +12,19 @@ export default function Component({params,code}) {
   useEffect(() => {
     const bloburl = getBlobUrl(code)
     setSrc(bloburl);
-  }, []);
+    setType('html')
+    Prism.highlightAll();
+  }, [code]);
   useEffect(()=> {
-    document.querySelector('.codearea.show').classList.remove('show')
-    document.querySelector(`.codearea#${type}`).classList.add('show')
+    document.querySelector('pre.show').classList.remove('show')
+    document.querySelector(`pre#${type}`).classList.add('show')
   },[type])
   const onChange = (e) => {
-    document.querySelector('.btn.select').classList.remove('select')
-    e.target.classList.add('select')
-    setType(e.target.innerText)
+    if (e.target.classList.contains('btn')){
+      document.querySelector('.btn.select').classList.remove('select')
+      e.target.classList.add('select')
+      setType(e.target.innerText)
+    }
   }
   return (
     <Layout>
@@ -30,9 +36,18 @@ export default function Component({params,code}) {
           <button className="btn">css</button>
         </div>
         <div className="form__wrap">
-          <textarea disabled value={code.html} className="codearea show" name="" id="html"></textarea>
+          <pre className="show" id="html">
+            <code className="language-html">{code.html}</code>
+          </pre>
+          <pre id="js">
+            <code className="language-js">{code.js}</code>
+          </pre>
+          <pre id="css">
+            <code className="language-css">{code.css}</code>
+          </pre>
+          {/* <textarea disabled value={code.html} className="codearea show" name="" id="html"></textarea>
           <textarea disabled value={code.js} className="codearea" name="" id="js" ></textarea>
-          <textarea disabled value={code.css} className="codearea" name="" id="css" ></textarea>
+          <textarea disabled value={code.css} className="codearea" name="" id="css" ></textarea> */}
         </div>
         <div className="code_preview">
           <a target="_blank" href={url} className="new_link">
@@ -43,6 +58,7 @@ export default function Component({params,code}) {
         <style jsx>
           {`
             .code__container { 
+              margin:auto;
               width: 80%;
               height: 500px;
             }
@@ -50,7 +66,7 @@ export default function Component({params,code}) {
               width: 100%;
               height: 100%;
             }
-            .codearea {
+            pre {
               width : 100%;
               height : 400px;
               display:none;
@@ -62,12 +78,17 @@ export default function Component({params,code}) {
             }
             
             .btn {
-              border: 1px solid black;
-              border-radius :2px;
+              border: 1px solid #9ea3a3;
+              width: 50px;
+              padding: 8px 6px;
+              margin: 5px;
+              background-color:#e4e4e9;
+              border-radius: 5px;
+              cursor: pointer;
             }
             
             .btn.select {
-              background-color : gray;
+              background-color: #babae3;
             }
             
             .code_preview {

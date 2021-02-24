@@ -1,11 +1,10 @@
 import { posts } from '../../lib/FILE'
 import Layout from '../../components/layout'
 import Markdown from '../../components/markdown'
-import { remarkHTML } from '../../lib/posts';
+import { mdParser } from '../../lib/posts';
 
-export default function Post({params,data}) {
-  const { id } = params
-  const [subject,item] = id;
+export default function Post(props) {
+  const {params, data} = props
   return (
     <Layout>
       <Markdown data={data}></Markdown>
@@ -32,7 +31,7 @@ export async function getStaticPaths() {
   // Return a list of possible value for id
 }
 export async function getStaticProps({ params }) {
-  const data = await remarkHTML(params.id)
+  const data = await mdParser(params.id)
   return {
     props: {
       params,
