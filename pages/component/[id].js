@@ -4,6 +4,7 @@ import {getBlobUrl} from '../../lib/components'
 import {getComponent} from '../../lib/firebase'
 import { useEffect, useState } from 'react'
 import Prism from 'prismjs';
+import Head from 'next/head'
 
 export default function Component({params,code}) {
   const { id } = params
@@ -28,6 +29,9 @@ export default function Component({params,code}) {
   }
   return (
     <Layout>
+      <Head>
+        <title>Ssong10 | {params.id}</title>
+      </Head>
       <div className="code__container">
         <h1>{id}</h1>
         <div onClick={onChange} className="tab__wrap">

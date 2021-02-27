@@ -1,0 +1,106 @@
+
+#nav {
+  z-index:1000;
+  position :sticky;
+  top : 0;
+  left : 0;
+  right : 0;
+  background-color:#fefcfe;
+  border-bottom: 1px solid #eaeaea;
+  height : 3.6rem;
+  padding : 0.6rem 1rem;
+}
+header {box-sizing: border-box;}
+.main-title {display:inline-block;font-weight:700;font-size:1.4rem;cursor : pointer;  line-height : 2.4rem;}
+.nav-links{display:inline-block;position:absolute;right:5vw;}
+.nav-sub{display:inline-block;line-height:2.4rem;position:relative;margin-left:3vw;cursor:pointer;text-align:left}
+.nav-sub:hover .nav-item-list {display:block}
+.nav-sub>span {padding:1vw}
+.nav-items-wrap { padding-top:20px}
+.nav-item-list {display:none;position: absolute;line-height:2.2rem;width:200px;right:-5px;top:85%;min-height:auto;border:1px solid #eaeaea;background-color:#fefcfe;padding:0.3rem}
+.nav-item{
+  padding:0rem 0.5rem;
+  transition: 0.3s
+}
+.nav-item:hover {
+  background-color : rgba(150, 150, 150, 0.15);
+}
+.active {color: #2f9aea;}
+
+#nav .side-button {
+  display:none;
+  line-height:2.4rem;
+  font-size:1.6rem;
+  cursor: pointer;
+}
+.mobile-title {
+  display:none;
+  font-weight:600;
+  font-size:1.1rem;
+  line-height : 2.4rem;
+  float:right;
+}
+
+/* PC 에서만 */
+.nav-links .nav-item-list:after {
+  left: 170px;
+  border-color: transparent transparent white transparent;
+  border-width: 10px;
+}
+.nav-links .nav-item-list:before {
+  left: 169px;
+  top:-21px;
+  border-color: transparent transparent gray transparent;
+  border-width: 11px;
+  z-index:-1
+}
+
+
+/* 모바일에서만 */
+
+.mobile-home { 
+  display:none;
+}
+
+@media screen and (max-width: 767px) {
+  .mobile-title {
+    display : inline-block;
+  }
+  .main-title { 
+    display:none;
+  }
+  #nav .side-button {
+    display:inline-block;
+  }
+  header, .container {
+    font-size: 80%;
+  }
+  ol,ul {
+    padding-inline-start : 24px;
+  }
+  .nav-item-list {
+    z-index : 1000;
+    left : 5rem;
+    top : 1.2rem;
+  }
+  .mobile-home { 
+    display:block;
+  }
+  .nav-links {
+    position:unset;
+    display: none;
+    border: 1px solid #eaeaea;
+    z-index : 100;
+    background-color : #fefcfe;
+    max-width : 40%;
+  }
+  .nav-links.show {
+    display:block;
+  }
+  .nav-sub {
+    width : 100%;
+  }
+  .nav-items-wrap {
+    padding-top:0px;
+  }
+}

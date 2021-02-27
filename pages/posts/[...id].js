@@ -2,11 +2,14 @@ import { posts } from '../../lib/FILE'
 import Layout from '../../components/layout'
 import Markdown from '../../components/markdown'
 import { mdParser } from '../../lib/posts';
-
+import Head from 'next/head'
 export default function Post(props) {
   const {params, data} = props
   return (
     <Layout>
+      <Head>
+        <title>Ssong10 | {params.id[1]}</title>
+      </Head>
       <Markdown data={data}></Markdown>
     </Layout>
   )
