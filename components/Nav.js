@@ -2,6 +2,7 @@ import Link   from 'next/link'
 import { posts, components } from '../lib/FILE'
 import { useRouter } from "next/router";
 import {useState,useEffect} from "react"
+
 const Item = ({item,path,match}) => {
   return (
     <Link href={path}
@@ -42,11 +43,7 @@ const mobiletitle = (path) => {
   }
 }
 export default function Nav() {
-  const [isMobile, setIsMobile] = useState(true)
-  useEffect(()=>{
-    setIsMobile(window.innerWidth < 767)
-  },[])
-  const [sideNav, setSideNav] = useState(true)
+  const [sideNav, setSideNav] = useState(false)
   const { asPath } = useRouter();
   const path = decodeURI(asPath).trim('/').split('/')
   const toggleSideNav = () => {
@@ -54,15 +51,24 @@ export default function Nav() {
   }
   return (
     <header id="nav">
+      <div onClick={toggleSideNav} className="side-button" >
+        <svg viewBox="0 0 100 80" width="20" height="20">
+          <rect width="100" height="18"></rect>
+          <rect y="35" width="100" height="18"></rect>
+          <rect y="70" width="100" height="18"></rect>
+        </svg>
+      </div>
       <i onClick={toggleSideNav} className="side-button fas fa-bars" aria-hidden="true"></i>
       <Link href="/">
         <span className="main-title">Ssong10</span>
       </Link>
       <span className="mobile-title">{mobiletitle(path.slice(-2,))}</span>
       <div className={sideNav ? 'nav-links show' : "nav-links"}>
+        <Link href="/">
         <div className="nav-sub mobile-home">
           <span>Ssong10</span>
         </div>
+        </Link>
         {posts.map((post,idx) => (
           <Subject
             paths={path.slice(-2,)}
