@@ -1,0 +1,15 @@
+body {margin:0;padding:0}
+.container {width:80%;margin:auto;}
+.container img {max-width: 100%;}
+@media screen and (max-width: 767px) {
+ .container {width:90%;  font-size: 80%;}
+  ol,ul {
+    padding-inline-start : 24px;
+  }
+}
+
+.container blockquote {
+  margin-inline-start: 5px;
+  border-left : 5px solid rgba(80,80,80,0.2);
+  padding-left : 10px;
+}

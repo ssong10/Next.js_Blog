@@ -22,10 +22,11 @@ export default function Component({params,code}) {
   },[type])
   const onChange = (e) => {
     if (e.target.classList.contains('btn')){
-      document.querySelector('.btn.select').classList.remove('select')
-      e.target.classList.add('select')
       setType(e.target.innerText)
     }
+  }
+  const selected = (btn) => {
+    return (btn === type) ? 'btn select' :'btn'
   }
   return (
     <Layout>
@@ -35,9 +36,9 @@ export default function Component({params,code}) {
       <div className="code__container">
         <h1>{id}</h1>
         <div onClick={onChange} className="tab__wrap">
-          <button className="btn select">html</button>
-          <button className="btn">js</button>
-          <button className="btn">css</button>
+          <button className={selected('html')}>html</button>
+          <button className={selected('js')}>js</button>
+          <button className={selected('css')}>css</button>
         </div>
         <div className="form__wrap">
           <pre className="show" id="html">
@@ -112,6 +113,11 @@ export default function Component({params,code}) {
               width : 10px;
               height: 10px;
               background-color: gray;
+            }
+            @media screen and (max-width: 767px) {
+              .code__container { 
+                width: 100%;
+              }
             }
           `
           }

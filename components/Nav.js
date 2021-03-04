@@ -43,8 +43,11 @@ const mobiletitle = (path) => {
   }
 }
 export default function Nav() {
-  const [sideNav, setSideNav] = useState(false)
   const { asPath } = useRouter();
+  const [sideNav, setSideNav] = useState(false)
+  useEffect(()=>{
+    setSideNav(false)
+  },[asPath])
   const path = decodeURI(asPath).trim('/').split('/')
   const toggleSideNav = () => {
     setSideNav(!sideNav)

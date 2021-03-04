@@ -72,11 +72,8 @@ header {box-sizing: border-box;}
   #nav .side-button {
     display:inline-block;
   }
-  header, .container {
+  header {
     font-size: 80%;
-  }
-  ol,ul {
-    padding-inline-start : 24px;
   }
   .nav-item-list {
     z-index : 1000;
