@@ -2,9 +2,11 @@ import { components } from '../../lib/FILE'
 import Layout from '../../components/layout'
 import {getBlobUrl} from '../../lib/components'
 import {getComponent} from '../../lib/firebase'
+import Markdown from '../../components/markdown'
 import { useEffect, useState } from 'react'
 import Prism from 'prismjs';
 import Head from 'next/head'
+import { renderer } from '../../lib/posts';
 
 export default function Component({params,code}) {
   const { id } = params
@@ -35,6 +37,10 @@ export default function Component({params,code}) {
       </Head>
       <div className="code__container">
         <h1>{id}</h1>
+        <div className="description">
+          <Markdown data={renderer(code.description || '') }>
+          </Markdown>
+        </div>
         <div onClick={onChange} className="tab__wrap">
           <button className={selected('html')}>html</button>
           <button className={selected('js')}>js</button>
@@ -65,7 +71,6 @@ export default function Component({params,code}) {
             .code__container { 
               margin:auto;
               width: 80%;
-              height: 500px;
             }
             iframe {
               width: 100%;

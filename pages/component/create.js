@@ -5,6 +5,7 @@ import {fetchComponent} from '../../lib/firebase'
 
 export default function Component() {
   const initcode = {
+    description : '',
     html : '<div class="red">안녕</div>',
     js : '',
     css : '.red {background-color:red;width:100px;height:100px;'
@@ -41,6 +42,8 @@ export default function Component() {
     <Layout>
       title : <input value={title} onChange={(e)=>setTitle(e.target.value)}></input>
       <div className="code__container">
+        <textarea onChange={changeCode} defaultValue={code.description} name="" id="description"></textarea>
+
         <div onClick={onChange} className="tab__wrap">
           <button className="btn select">html</button>
           <button className="btn">js</button>
@@ -63,7 +66,7 @@ export default function Component() {
           {`
             .code__container { 
               width: 80%;
-              height: 500px;
+              min-height: 500px;
             }
             iframe {
               width: 100%;
