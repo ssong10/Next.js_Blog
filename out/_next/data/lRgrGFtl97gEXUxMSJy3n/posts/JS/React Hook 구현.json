@@ -1,1 +1,0 @@
-{"pageProps":{"params":{"id":["JS","React Hook 구현"]},"data":"<h1>useState</h1>\n<pre><code class=\"language-js\">function useState(value) {\n  this._value = value\n  function state() {\n    return _value\n  }\n  function setState(newValue) {\n    _value = newValue\n  }\n  return [state, setState]\n}\n</code></pre>\n"},"__N_SSG":true}
