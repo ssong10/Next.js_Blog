@@ -19,6 +19,7 @@ export default function Layout({children}) {
           </a>
         </div>
         <div><small>Ssong10</small></div>
+        <div><small>leesy1403@naver.com</small></div>
       </footer>
     </>
   )
