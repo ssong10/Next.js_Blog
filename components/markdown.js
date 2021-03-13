@@ -6,6 +6,6 @@ export default function Markdown({data}) {
     Prism.highlightAll();
   },[data])
   return (
-    <div dangerouslySetInnerHTML={{__html:data}} />
+    <div className="markdown" dangerouslySetInnerHTML={{__html:data}} />
   )
 }

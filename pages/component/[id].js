@@ -8,7 +8,7 @@ import Prism from 'prismjs';
 import Head from 'next/head'
 import { renderer } from '../../lib/posts';
 
-export default function Component({params,code}) {
+export default function Component({params,code, description}) {
   const { id } = params
   const [url, setSrc] = useState(''); // initial src will be empty
   const [ type, setType] = useState('html')
@@ -35,11 +35,10 @@ export default function Component({params,code}) {
       <Head>
         <title>Ssong10 | {params.id}</title>
       </Head>
-      <div className="code__container">
+      <main className="code__container">
         <h1>{id}</h1>
         <div className="description">
-          <Markdown data={renderer(code.description || '') }>
-          </Markdown>
+          <Markdown data={(description || '') } />
         </div>
         <div onClick={onChange} className="tab__wrap">
           <button className={selected('html')}>html</button>
@@ -68,10 +67,6 @@ export default function Component({params,code}) {
         </div>
         <style jsx>
           {`
-            .code__container { 
-              margin:auto;
-              width: 80%;
-            }
             iframe {
               width: 100%;
               height: 100%;
@@ -121,13 +116,13 @@ export default function Component({params,code}) {
             }
             @media screen and (max-width: 767px) {
               .code__container { 
-                width: 100%;
+                width: 90%;
               }
             }
           `
           }
         </style>
-      </div>
+      </main>
     </Layout>
   )
 }
@@ -143,7 +138,6 @@ export async function getStaticPaths() {
     paths,
     fallback: false,
   }
-  // Return a list of possible value for id
 }
 export async function getStaticProps({ params }) {
   // const code = {
@@ -151,11 +145,13 @@ export async function getStaticProps({ params }) {
   //   js : '',
   //   css : '.red {background-color:red;width:100px;height:100px;'
   // }
-  const code = await getComponent(params.id)
+  const {html,js,css,description} = await getComponent(params.id)
+  const descriptionData = renderer(description || '')
   return {
     props: {
       params,
-      code
+      code : {html,js,css},
+      description : descriptionData
     }
   }
 }

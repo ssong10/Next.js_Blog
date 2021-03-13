@@ -1,16 +1,22 @@
 import { posts } from '../../lib/FILE'
 import Layout from '../../components/layout'
 import Markdown from '../../components/markdown'
-import { mdParser } from '../../lib/posts';
+import { mdParser,getAnchorHTML } from '../../lib/posts';
 import Head from 'next/head'
 export default function Post(props) {
-  const {params, data} = props
+  const { params, data, anchor } = props
   return (
     <Layout>
       <Head>
         <title>Ssong10 | {params.id[1]}</title>
       </Head>
-      <Markdown data={data}></Markdown>
+      <section className="side-bar">
+        <p><span className="side-bar-title">{params.id[1]}</span></p>
+        <ul className="anchor-list" dangerouslySetInnerHTML={{__html:anchor}}></ul>
+      </section>
+      <main className="container">
+        <Markdown data={data}></Markdown>
+      </main>
     </Layout>
   )
 }
@@ -35,10 +41,12 @@ export async function getStaticPaths() {
 }
 export async function getStaticProps({ params }) {
   const data = await mdParser(params.id)
+  const anchor = getAnchorHTML()
   return {
     props: {
       params,
-      data
+      data,
+      anchor
     }
   }
 }

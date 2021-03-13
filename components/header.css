@@ -16,14 +16,14 @@ header {box-sizing: border-box;}
 .nav-sub{display:inline-block;line-height:2.4rem;position:relative;margin-left:3vw;cursor:pointer;text-align:left}
 .nav-sub:hover .nav-item-list {display:block}
 .nav-sub>span {padding:1vw}
-.nav-items-wrap { padding-top:20px}
-.nav-item-list {display:none;position: absolute;line-height:2.2rem;width:200px;right:-5px;top:85%;min-height:auto;border:1px solid #eaeaea;background-color:#fefcfe;padding:0.3rem}
+.nav-items-wrap { padding-top:20px;font-size:0.9rem;}
+.nav-item-list {display:none;position: absolute;line-height:2rem;width:200px;right:-5px;top:85%;min-height:auto;border:1px solid #eaeaea;background-color:#fefcfe;padding:0.3rem}
 .nav-item{
   padding:0rem 0.5rem;
   transition: 0.3s
 }
 .nav-item:hover {
-  background-color : rgba(150, 150, 150, 0.15);
+  color : steelblue;
 }
 .active {color: #2f9aea;}
 
@@ -36,25 +36,31 @@ header {box-sizing: border-box;}
 .mobile-title {
   display:none;
   font-weight:600;
-  font-size:1.1rem;
+  font-size:1rem;
   line-height : 2.4rem;
   float:right;
 }
 
 /* PC 에서만 */
-.nav-links .nav-item-list:after {
-  left: 170px;
-  border-color: transparent transparent white transparent;
-  border-width: 10px;
-}
 .nav-links .nav-item-list:before {
+  content: '\a';
+  position: absolute;
+  border-style: solid;
   left: 169px;
   top:-21px;
   border-color: transparent transparent gray transparent;
   border-width: 11px;
   z-index:-1
 }
-
+.nav-links .nav-item-list:after {
+  content : ' ';
+  position: absolute;
+  left: 170px;
+  top : -20px;
+  border-style: solid;
+  border-color: transparent transparent white transparent;
+  border-width: 10px;
+}
 
 /* 모바일에서만 */
 
@@ -63,6 +69,12 @@ header {box-sizing: border-box;}
 }
 
 @media screen and (max-width: 767px) {
+  .nav-links .nav-item-list:before {
+    display: none;
+  }
+  .nav-links .nav-item-list:after {
+    display: none;
+  }
   .mobile-title {
     display : inline-block;
   }

@@ -65,7 +65,6 @@ export default function Component() {
         <style jsx>
           {`
             .code__container { 
-              width: 80%;
               min-height: 500px;
             }
             iframe {

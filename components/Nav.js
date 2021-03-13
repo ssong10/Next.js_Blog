@@ -5,8 +5,7 @@ import {useState,useEffect} from "react"
 
 const Item = ({item,path,match}) => {
   return (
-    <Link href={path}
-    >
+    <Link href={path}>
       <div className={"nav-item " + (match?'active':'')}>
         <span>{item}</span>
       </div>
@@ -54,14 +53,7 @@ export default function Nav() {
   }
   return (
     <header id="nav">
-      <div onClick={toggleSideNav} className="side-button" >
-        <svg viewBox="0 0 100 80" width="20" height="20">
-          <rect width="100" height="18"></rect>
-          <rect y="35" width="100" height="18"></rect>
-          <rect y="70" width="100" height="18"></rect>
-        </svg>
-      </div>
-      <i onClick={toggleSideNav} className="side-button fas fa-bars" aria-hidden="true"></i>
+      <i onClick={toggleSideNav} className="side-button fas fa-bars"></i>
       <Link href="/">
         <span className="main-title">Ssong10</span>
       </Link>
