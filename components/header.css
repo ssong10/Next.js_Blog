@@ -114,3 +114,13 @@ header {box-sizing: border-box;}
     padding-top:0px;
   }
 }
+.markdown h1 {
+  color: #606070;
+}
+.markdown h2 {
+  color: #707085;
+}
+
+.markdown h3 {
+  color : #8080a0;
+}
