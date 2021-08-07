@@ -1,7 +1,7 @@
 import Layout from '@components/layout'
-import {getBlobUrl} from '@lib/components'
+import {getBlobUrl} from '@utils/components'
 import { useEffect, useState } from 'react'
-import {fetchComponent} from '@lib/firebase'
+import {fetchComponent} from '@utils/firebase'
 
 export default function Component() {
   const initcode = {
