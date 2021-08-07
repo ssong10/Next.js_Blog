@@ -1,12 +1,25 @@
-import { components } from '../../lib/FILE'
-import Layout from '../../components/layout'
-import {getBlobUrl} from '../../lib/components'
-import {getComponent} from '../../lib/firebase'
-import Markdown from '../../components/markdown'
+import { components } from '@constant/FILE'
+import Layout from '@components/layout'
+import {getBlobUrl} from '@utils/components'
+import {getComponent} from '@utils/firebase'
+import Markdown from '@components/markdown'
 import { useEffect, useState } from 'react'
-import Prism from 'prismjs';
+import Prism from '@utils/prism';
 import Head from 'next/head'
-import { renderer } from '../../lib/posts';
+import { renderer } from '@utils/posts';
+import styled from 'styled-components'
+const CodeContainer = styled.main`
+  margin : 50px 10% 100px 10%;
+  line-height:2;
+  min-height: 90vh;
+
+  @media screen and (max-width: 768px) {
+    margin : 50px 5% 100px 5%;
+    width:90%;
+    font-size: 80%;
+  }
+`
+
 
 export default function Component({params,code, description}) {
   const { id } = params
@@ -35,7 +48,7 @@ export default function Component({params,code, description}) {
       <Head>
         <title>Ssong10 | {params.id}</title>
       </Head>
-      <main className="code__container">
+      <CodeContainer>
         <h1>{id}</h1>
         <div className="description">
           <Markdown data={(description || '') } />
@@ -122,7 +135,7 @@ export default function Component({params,code, description}) {
           `
           }
         </style>
-      </main>
+      </CodeContainer>
     </Layout>
   )
 }

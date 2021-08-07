@@ -1,10 +1,34 @@
-import { posts } from '../../lib/FILE'
-import Layout from '../../components/layout'
-import Markdown from '../../components/markdown'
-import { mdParser,getAnchorHTML } from '../../lib/posts';
+import { posts } from '@constant/FILE'
+import Layout from '@components/layout'
+import Markdown from '@components/markdown'
+import Timestamp from '@components/timestamp'
+import { getPost } from '@utils/firebase'
+import { renderer, getAnchorHTML } from '@utils/posts';
 import Head from 'next/head'
+import styled from 'styled-components'
+const Container = styled.main`
+  margin-bottom: 100px;
+  margin-left : 17vw;
+  line-height:2;
+  min-height: 90vh;
+  
+  @media screen and (max-width: 768px) {
+    width:90%;
+    font-size: 80%;
+  }
+  @media screen and (max-width: 1280px) {
+    margin-left: 0;
+  }
+`
+const Content = styled.div`
+  width: 85%;
+  margin: auto;  
+`
+const Title = styled.h1`
+  text-align:center;
+`
 export default function Post(props) {
-  const { params, data, anchor } = props
+  const { params, data, anchor,createdAt, updatedAt } = props
   return (
     <Layout>
       <Head>
@@ -14,12 +38,19 @@ export default function Post(props) {
         <p><span className="side-bar-title">{params.id[1]}</span></p>
         <ul className="anchor-list" dangerouslySetInnerHTML={{__html:anchor}}></ul>
       </section>
-      <main className="container">
-        <Markdown data={data}></Markdown>
-      </main>
+      <Container>
+        <Content>
+          <Title>
+          {params.id[1]}  
+          </Title>
+          <Timestamp createdAt={createdAt} updatedAt={updatedAt}></Timestamp>
+          <Markdown data={data}></Markdown>
+        </Content>
+      </Container>
     </Layout>
   )
 }
+
 export async function getStaticPaths() {
   const paths = posts.reduce((prev,post) => {
     const items = post.items.map(item=>{
@@ -37,16 +68,19 @@ export async function getStaticPaths() {
     paths,
     fallback: false,
   }
-  // Return a list of possible value for id
 }
+
 export async function getStaticProps({ params }) {
-  const data = await mdParser(params.id)
+  const post = await getPost(params.id)
+  const data = await renderer(post.content)
   const anchor = getAnchorHTML()
   return {
     props: {
       params,
       data,
-      anchor
+      anchor,
+      createdAt : post.createdAt,
+      updatedAt : post.updatedAt,
     }
   }
 }

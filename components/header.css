@@ -16,6 +16,7 @@ header {box-sizing: border-box;}
 .nav-sub{display:inline-block;line-height:2.4rem;position:relative;margin-left:3vw;cursor:pointer;text-align:left}
 .nav-sub:hover .nav-item-list {display:block}
 .nav-sub>span {padding:1vw}
+.nav-item a {text-decoration:none;color:unset}
 .nav-items-wrap { padding-top:20px;font-size:0.9rem;}
 .nav-item-list {display:none;position: absolute;line-height:2rem;width:200px;right:-5px;top:85%;min-height:auto;border:1px solid #eaeaea;background-color:#fefcfe;padding:0.3rem}
 .nav-item{

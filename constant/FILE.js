@@ -17,7 +17,11 @@ export const posts = [
       '명령형과 선언형',
       'React Hook 구현',
       '동기&비동기',
-      '비동기처리'
+      '비동기처리',
+      'Webpack 이해와 설정',
+      'TypeScript - config',
+      'TypeScript - Type',
+      'TypeScript - generics'
     ]
   },
   // {

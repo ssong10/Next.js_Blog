@@ -1,5 +1,5 @@
-/* PrismJS 1.22.0
-https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+css+clike+javascript+bash+css-extras+django+git+http+icon+java+json+markdown+markup-templating+plsql+python+jsx+tsx+scss+sql+typescript+typoscript */
+/* PrismJS 1.24.1
+https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+css+clike+javascript+bash+css-extras+django+git+http+java+js-extras+json+markdown+markup-templating+plsql+promql+python+jsx+tsx+sass+scss+sql+typescript */
 /**
  * prism.js tomorrow night eighties for JavaScript, CoffeeScript, CSS and HTML
  * Based on https://github.com/chriskempson/tomorrow-theme
@@ -32,22 +32,11 @@ https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+css+cli
  
  /* Code blocks */
  pre[class*="language-"] {
-   transform: translate3d(0,0,0);
    padding: 1em;
    margin: .5em 0;
    overflow: auto;
-  }
-  
-  pre[class*="language-"]::before {
-   position:fixed;
-  top: 5px;
-  right: 10px;
-  color: gray
  }
- pre[class~=language-js]::before {content: "js";}
- pre[class~=language-css]::before {content: "css";}
- pre[class~=language-html]::before {content: "html";}
-
+ 
  :not(pre) > code[class*="language-"],
  pre[class*="language-"] {
    background: #2d2d2d;
@@ -76,7 +65,7 @@ https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+css+cli
  .token.attr-name,
  .token.namespace,
  .token.deleted {
-   color: #e98286;
+   color: #e2777a;
  }
  
  .token.function-name {
@@ -93,7 +82,7 @@ https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+css+cli
  .token.class-name,
  .token.constant,
  .token.symbol {
-   color: #ffd375;
+   color: #f8c555;
  }
  
  .token.selector,
@@ -133,4 +122,5 @@ https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+css+cli
  .token.inserted {
    color: green;
  }
-
+ 
+ 

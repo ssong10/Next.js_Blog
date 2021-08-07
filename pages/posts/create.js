@@ -1,5 +1,5 @@
-import Layout from '../../components/layout'
-import { fetchPost } from '../../lib/firebase'
+import Layout from '@components/layout'
+import { fetchPost } from '@utils/firebase'
 import { useState } from 'react'
 export default function PostCreate() {
   const [post,setPost] = useState({sub:'',item:'',context:''})

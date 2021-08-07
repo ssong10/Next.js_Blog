@@ -1,5 +1,5 @@
 import {useEffect} from 'react'
-import Prism from 'prismjs';
+import Prism from '@utils/prism';
 
 export default function Markdown({data}) {
   useEffect(()=>{

@@ -1,5 +1,5 @@
 import Link   from 'next/link'
-import { posts, components } from '../lib/FILE'
+import { posts, components } from '@constant/FILE'
 import { useRouter } from "next/router";
 import {useState,useEffect} from "react"
 
@@ -7,7 +7,7 @@ const Item = ({item,path,match}) => {
   return (
     <Link href={path}>
       <div className={"nav-item " + (match?'active':'')}>
-        <span>{item}</span>
+        <a href={path}><span>{item}</span></a>
       </div>
     </Link>
   )

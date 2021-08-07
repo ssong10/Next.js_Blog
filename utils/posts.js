@@ -1,4 +1,4 @@
-import {getPost} from '../lib/firebase'
+import {getPost} from './firebase'
 import markdownIt from 'markdown-it'
 const anchor = require('markdown-it-anchor')
 
@@ -20,10 +20,7 @@ const md = markdownIt({
   permalinkSymbol: '#',
   permalinkBefore: true
 })
-export async function mdParser(path) {
-  const content = await getPost(path)
-  return renderer(content)
-}
+
 export function getAnchorHTML () {
   const data = anchorHTML
   return data
