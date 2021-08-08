@@ -7,6 +7,7 @@ const TimeWrap = styled.div`
 const Time = styled.span`
   display: block;
   font-size: 14px;
+  color: #808080;
 `
 const F = (t) => {
   return t < 10 ? '0'+t : t
@@ -25,11 +26,11 @@ const Timestamp = ({createdAt,updatedAt}) => {
   return (
     <TimeWrap>
       <Time>
-        작성일자 : {timeFormat(createdAt)}
+        작성일자 - {timeFormat(createdAt)}
       </Time>
       {createdAt === updatedAt ||
         <Time>
-          수정일자 : {timeFormat(updatedAt)}
+          수정일자 - {timeFormat(updatedAt)}
         </Time>
       }
     </TimeWrap>

@@ -15,7 +15,7 @@ export const posts = [
     items : [
       '기본',
       '명령형과 선언형',
-      'React Hook 구현',
+      // 'React Hook 구현',
       '동기&비동기',
       '비동기처리',
       'Webpack 이해와 설정',
@@ -48,7 +48,7 @@ export const posts = [
     subject: 'etc',
     items : [
       'git',
-      '입출력',
+      // '입출력',
       'DataBase',
       'DeadLock'
     ]

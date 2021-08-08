@@ -6,6 +6,7 @@ import { getPost } from '@utils/firebase'
 import { renderer, getAnchorHTML } from '@utils/posts';
 import Head from 'next/head'
 import styled from 'styled-components'
+
 const Container = styled.main`
   margin-bottom: 100px;
   margin-left : 17vw;
