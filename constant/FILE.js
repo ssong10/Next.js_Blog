@@ -22,7 +22,8 @@ export const posts = [
       'Webpack 이해와 설정',
       'TypeScript - config',
       'TypeScript - Type',
-      'TypeScript - generics'
+      'TypeScript - generics',
+      'CSR vs SSR (with Next)'
     ]
   },
   // {
