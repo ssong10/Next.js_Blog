@@ -20,7 +20,6 @@ const CodeContainer = styled.main`
   }
 `
 
-
 export default function Component({params,code, description}) {
   const { id } = params
   const [url, setSrc] = useState(''); // initial src will be empty

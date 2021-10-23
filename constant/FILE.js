@@ -14,6 +14,7 @@ export const posts = [
     subject :'JS',
     items : [
       '기본',
+      'To Study',
       '명령형과 선언형',
       // 'React Hook 구현',
       '이벤트 루프',
